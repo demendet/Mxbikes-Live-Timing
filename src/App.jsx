@@ -17,7 +17,8 @@ function App() {
   // Fetch data from API
   const fetchData = async () => {
     try {
-      const response = await fetch('http://localhost:8000/servers/5121')
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+      const response = await fetch(`${apiUrl}/servers/5121`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
@@ -46,6 +47,32 @@ function App() {
     const minutes = Math.floor(seconds / 60)
     const secs = (seconds % 60).toFixed(3)
     return `${minutes}:${secs.padStart(6, '0')}`
+  }
+
+  // Format session time (counts down for timed sessions)
+  const formatSessionTime = (currentTime, sessionLength) => {
+    // If no time data, show placeholder
+    if (currentTime === null || currentTime === undefined) return '--:--'
+    
+    // If session_length is "5", that means 5 minutes total
+    // We need to show REMAINING time (countdown)
+    if (sessionLength && sessionLength !== "0") {
+      // Parse the session length - it's usually just a number like "5" for 5 minutes
+      const totalMinutes = parseInt(sessionLength) || 0
+      const totalSeconds = totalMinutes * 60
+      
+      // Calculate remaining time
+      const remainingSeconds = Math.max(0, totalSeconds - currentTime)
+      
+      const minutes = Math.floor(remainingSeconds / 60)
+      const seconds = Math.floor(remainingSeconds % 60)
+      const milliseconds = Math.floor((remainingSeconds % 1) * 1000)
+      
+      return `${minutes}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(3, '0')}`
+    }
+    
+    // If no session length defined, just show elapsed time
+    return formatTime(currentTime)
   }
 
   // Format gap helper
@@ -80,8 +107,8 @@ function App() {
             <div className="w-32 h-32 border-4 border-neon-blue border-t-transparent rounded-full animate-spin mx-auto"></div>
             <div className="w-24 h-24 border-4 border-neon-pink border-t-transparent rounded-full animate-spin absolute top-4 left-1/2 transform -translate-x-1/2"></div>
           </div>
-          <h2 className="cyber-header mb-4">INITIALIZING</h2>
-          <p className="text-neon-blue font-cyber text-lg">
+          <h2 className="main-header mb-4">INITIALIZING</h2>
+          <p className="text-primary-blue font-mono text-lg">
             CONNECTING TO LIVE TIMING SERVER...
           </p>
           <div className="mt-6 flex justify-center space-x-2">
@@ -109,16 +136,13 @@ function App() {
         
         <div className="glass-card max-w-md text-center z-10 animate-scale-in">
           <div className="w-16 h-16 border-4 border-neon-pink border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
-          <h2 className="text-4xl font-cyber font-black text-neon-pink mb-6 animate-glow">
+          <h2 className="text-3xl font-sans font-bold text-error-red mb-6">
             CONNECTION FAILED
           </h2>
-          <p className="text-white/80 mb-6 font-futuristic">{error}</p>
-          <p className="text-sm text-white/60 mb-8 font-futuristic">
-            Ensure the MX Bikes API server is running at localhost:8000
-          </p>
+          <p className="text-white/80 mb-8 font-futuristic">{error}</p>
           <button 
             onClick={() => {setLoading(true); fetchData()}}
-            className="cyber-button"
+            className="modern-button"
           >
             RETRY CONNECTION
           </button>
@@ -143,10 +167,10 @@ function App() {
         <div className="container mx-auto">
           <div className="flex items-center justify-between animate-slide-in-left">
             <div className="flex items-center space-x-6">
-              <h1 className="text-4xl md:text-5xl font-cyber font-black text-white">Default MX Server</h1>
+              <h1 className="text-3xl md:text-4xl font-sans font-bold text-white">Default MX Server</h1>
             </div>
-            <div className="text-right text-sm text-white/80 font-cyber animate-slide-in-right">
-              <p className="text-neon-blue">SERVER ID: 5121</p>
+            <div className="text-right text-sm text-white/80 font-mono">
+              <p className="text-primary-blue">SERVER ID: 5121</p>
               <p>LAST UPDATE: {lastUpdate?.toLocaleTimeString() || '--'}</p>
             </div>
           </div>
@@ -157,7 +181,7 @@ function App() {
         {/* Server & Session Info Row */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in-up">
           {/* Server Info */}
-          <div className="neon-card">
+          <div className="modern-card">
             <h2 className="text-2xl font-cyber font-bold mb-6 text-neon-blue">
               SERVER STATUS
             </h2>
@@ -188,7 +212,7 @@ function App() {
           </div>
 
           {/* Session Info */}
-          <div className="neon-card">
+          <div className="modern-card">
             <h2 className="text-2xl font-cyber font-bold mb-6 text-neon-blue">
               SESSION DATA
             </h2>
@@ -211,13 +235,13 @@ function App() {
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-white/70 font-futuristic">Time:</span>
-                <span className="font-cyber text-neon-pink">{formatTime(data?.session?.session_time)}</span>
+                <span className="font-cyber text-neon-pink">{formatSessionTime(data?.session?.session_time, data?.session?.session_length)}</span>
               </div>
             </div>
           </div>
 
           {/* Weather Info */}
-          <div className="neon-card">
+          <div className="modern-card">
             <h2 className="text-2xl font-cyber font-bold mb-6 text-neon-blue">
               ENVIRONMENT
             </h2>
@@ -327,7 +351,7 @@ function App() {
         {/* Safety Data Row */}
         <div className="cyber-grid animate-fade-in-up" style={{animationDelay: '0.4s'}}>
           {/* Contacts/Crashes */}
-          <div className="neon-card">
+          <div className="modern-card">
             <h2 className="text-xl font-cyber font-bold mb-4 text-neon-pink">
               CONTACTS
             </h2>
@@ -355,7 +379,7 @@ function App() {
           </div>
 
           {/* Penalties */}
-          <div className="neon-card">
+          <div className="modern-card">
             <h2 className="text-xl font-cyber font-bold mb-4 text-neon-yellow">
               PENALTIES
             </h2>
@@ -382,7 +406,7 @@ function App() {
           </div>
 
           {/* Holeshots */}
-          <div className="neon-card">
+          <div className="modern-card">
             <h2 className="text-xl font-cyber font-bold mb-4 text-neon-green">
               HOLESHOTS
             </h2>
@@ -408,7 +432,7 @@ function App() {
           </div>
 
           {/* Driver Status */}
-          <div className="neon-card">
+          <div className="modern-card">
             <h2 className="text-xl font-cyber font-bold mb-4 text-neon-purple">
               DRIVER STATUS
             </h2>
