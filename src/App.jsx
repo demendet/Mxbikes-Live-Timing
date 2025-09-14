@@ -292,7 +292,6 @@ function App() {
                     <th>LAST LAP</th>
                     <th>RACE TIME</th>
                     <th>GAP</th>
-                    <th>LAPS</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -339,7 +338,6 @@ function App() {
                         </span>
                       </td>
                       <td className="text-sm font-cyber text-white/80">{formatGap(rider.gap)}</td>
-                      <td className="text-center font-cyber text-neon-yellow">{rider.total_laps || 0}</td>
                     </tr>
                   ))}
                 </tbody>
