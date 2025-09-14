@@ -308,11 +308,11 @@ function App() {
                       <td className="font-futuristic font-semibold text-white">{rider.name}</td>
                       <td className="text-sm text-white/70 font-futuristic">{rider.bike_short_name || rider.bike_name}</td>
                       <td>
-                        <span className={`px-3 py-1 rounded-full text-xs font-cyber font-bold border ${
-                          rider.status === 'TRK' ? 'bg-neon-green/20 text-neon-green border-neon-green/50' :
-                          rider.status === 'PIT' ? 'bg-neon-yellow/20 text-neon-yellow border-neon-yellow/50' :
+                        <span className={`px-3 py-1 rounded-full text-xs font-mono font-bold border ${
+                          rider.status === 'TRK' ? 'bg-green-500/20 text-green-400 border-green-400/50' :
+                          rider.status === 'PIT' ? 'bg-yellow-500/20 text-yellow-400 border-yellow-400/50' :
                           rider.status === 'DNS' ? 'bg-gray-600/20 text-gray-400 border-gray-400/50' :
-                          rider.status === 'RET' ? 'bg-neon-pink/20 text-neon-pink border-neon-pink/50' :
+                          rider.status === 'RET' ? 'bg-red-500/20 text-red-400 border-red-400/50' :
                           rider.status === 'DSQ' ? 'bg-red-800/20 text-red-400 border-red-400/50' :
                           'bg-white/20 text-white border-white/50'
                         }`}>

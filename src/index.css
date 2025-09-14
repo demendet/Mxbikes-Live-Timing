@@ -1,20 +1,20 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-primary-blue: #2563eb;
-  --color-accent-green: #16a34a;
-  --color-warning-orange: #ea580c;
-  --color-error-red: #dc2626;
-  --color-neutral-gray: #6b7280;
-  --color-dark-bg: #111827;
-  --color-darker-bg: #030712;
-  --color-card-bg: #1f2937;
-  --color-border: #374151;
+  --color-neon-blue: #3b82f6;
+  --color-neon-pink: #ec4899;
+  --color-neon-green: #10b981;
+  --color-neon-purple: #8b5cf6;
+  --color-neon-yellow: #f59e0b;
+  --color-cyber-dark: #111827;
+  --color-cyber-darker: #030712;
+  --color-cyber-gray: #1f2937;
+  --color-cyber-light: #374151;
   --color-glass-white: rgba(255, 255, 255, 0.05);
   --color-glass-dark: rgba(0, 0, 0, 0.2);
   
-  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
-  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-cyber: system-ui, sans-serif;
+  --font-futuristic: system-ui, sans-serif;
   
   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
@@ -43,7 +43,7 @@
 
 @layer base {
   body {
-    @apply bg-darker-bg text-white font-sans overflow-x-hidden;
+    @apply bg-cyber-darker text-white font-futuristic overflow-x-hidden;
     background: linear-gradient(135deg, #111827 0%, #030712 100%);
     background-attachment: fixed;
   }
@@ -58,11 +58,11 @@
   }
   
   *::-webkit-scrollbar-track {
-    @apply bg-border;
+    @apply bg-cyber-light;
   }
   
   *::-webkit-scrollbar-thumb {
-    @apply bg-neutral-gray rounded-full;
+    @apply bg-neon-blue rounded-full;
   }
 }
 
