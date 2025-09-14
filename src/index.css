@@ -1,0 +1,230 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-neon-blue: #00f5ff;
+  --color-neon-pink: #ff007f;
+  --color-neon-green: #39ff14;
+  --color-neon-purple: #bf00ff;
+  --color-neon-yellow: #ffff00;
+  --color-cyber-dark: #0a0a0f;
+  --color-cyber-darker: #050508;
+  --color-cyber-gray: #1a1a2e;
+  --color-cyber-light: #16213e;
+  --color-glass-white: rgba(255, 255, 255, 0.1);
+  --color-glass-dark: rgba(0, 0, 0, 0.3);
+  
+  --font-cyber: 'Orbitron', monospace;
+  --font-futuristic: 'Exo 2', sans-serif;
+  
+  --shadow-neon: 0 0 20px currentColor;
+  --shadow-neon-lg: 0 0 40px currentColor;
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --shadow-cyber: 0 0 20px rgba(0, 245, 255, 0.3);
+  
+  --animate-glow: glow 2s ease-in-out infinite alternate;
+  --animate-float: float 3s ease-in-out infinite;
+  --animate-pulse-neon: pulseNeon 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-slide-in-left: slideInLeft 0.5s ease-out;
+  --animate-slide-in-right: slideInRight 0.5s ease-out;
+  --animate-fade-in-up: fadeInUp 0.6s ease-out;
+  --animate-scale-in: scaleIn 0.4s ease-out;
+  --animate-gradient-shift: gradientShift 3s ease infinite;
+}
+
+@keyframes glow {
+  0% { 
+    text-shadow: 0 0 20px currentColor, 0 0 30px currentColor, 0 0 40px currentColor;
+    filter: brightness(1);
+  }
+  100% { 
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulseNeon {
+  0%, 100% { 
+    opacity: 1;
+    filter: brightness(1) drop-shadow(0 0 20px currentColor);
+  }
+  50% { 
+    opacity: 0.8;
+    filter: brightness(1.2) drop-shadow(0 0 30px currentColor);
+  }
+}
+
+@keyframes slideInLeft {
+  0% { transform: translateX(-100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  0% { transform: translateX(100%); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  0% { transform: translateY(40px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes scaleIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@layer base {
+  body {
+    @apply bg-cyber-darker text-white font-futuristic overflow-x-hidden;
+    background: radial-gradient(ellipse at center, #0a0a0f 0%, #050508 100%);
+    background-attachment: fixed;
+  }
+  
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #00f5ff #1a1a2e;
+  }
+  
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    @apply bg-cyber-gray;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    @apply bg-neon-blue rounded-full;
+    box-shadow: 0 0 10px #00f5ff;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-glass-white backdrop-blur-xl rounded-2xl border border-glass-white p-6 shadow-glass;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .neon-card {
+    @apply bg-cyber-gray rounded-2xl p-6 border border-neon-blue/30 shadow-cyber;
+    background: linear-gradient(135deg, rgba(26, 26, 46, 0.8) 0%, rgba(16, 33, 62, 0.6) 100%);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  
+  .neon-card:hover {
+    @apply border-neon-blue/60 shadow-neon-lg;
+    transform: translateY(-2px);
+  }
+  
+  .cyber-header {
+    @apply font-cyber text-4xl md:text-6xl font-black text-white;
+  }
+  
+  .neon-text {
+    @apply text-neon-blue;
+  }
+  
+  .status-connected {
+    @apply bg-neon-green/20 text-neon-green px-3 py-1 rounded-full text-xs font-bold border border-neon-green/50;
+  }
+  
+  .status-disconnected {
+    @apply bg-neon-pink/20 text-neon-pink px-3 py-1 rounded-full text-xs font-bold border border-neon-pink/50;
+  }
+  
+  .status-live {
+    @apply bg-neon-purple/20 text-neon-purple px-3 py-1 rounded-full text-xs font-bold border border-neon-purple/50;
+  }
+  
+  .cyber-table {
+    @apply w-full bg-cyber-gray/50 rounded-xl overflow-hidden backdrop-blur-sm border border-neon-blue/20;
+  }
+  
+  .cyber-table th {
+    @apply bg-cyber-light text-neon-blue font-cyber py-4 px-4 text-left border-b border-neon-blue/30;
+  }
+  
+  .cyber-table td {
+    @apply py-4 px-4 border-b border-cyber-light/50 transition-all duration-300;
+  }
+  
+  .cyber-table tr:hover {
+    @apply bg-neon-blue/5;
+    box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.1);
+  }
+  
+  .position-badge-modern {
+    @apply w-12 h-12 rounded-full flex items-center justify-center font-cyber font-bold text-lg border-2;
+    transition: all 0.3s ease;
+  }
+  
+  .position-1-modern {
+    @apply bg-neon-yellow/20 text-neon-yellow border-neon-yellow;
+    box-shadow: 0 0 20px rgba(255, 255, 0, 0.2);
+  }
+  
+  .position-2-modern {
+    @apply bg-slate-300/20 text-slate-300 border-slate-300;
+    box-shadow: 0 0 20px rgba(203, 213, 225, 0.2);
+  }
+  
+  .position-3-modern {
+    @apply bg-amber-500/20 text-amber-500 border-amber-500;
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+  }
+  
+  .position-other-modern {
+    @apply bg-cyan-400/20 text-cyan-400 border-cyan-400;
+  }
+  
+  .cyber-button {
+    @apply bg-neon-blue/20 hover:bg-neon-blue/30 text-neon-blue border border-neon-blue/50 hover:border-neon-blue px-6 py-3 rounded-xl font-cyber font-bold transition-all duration-300;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+  }
+  
+  .cyber-button:hover {
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .data-metric {
+    @apply text-3xl font-cyber font-black;
+  }
+  
+  .data-metric-danger {
+    @apply text-neon-pink;
+  }
+  
+  .data-metric-warning {
+    @apply text-neon-yellow;
+  }
+  
+  .data-metric-success {
+    @apply text-neon-green;
+  }
+  
+  .cyber-grid {
+    @apply grid gap-6 grid-cols-1 md:grid-cols-2 xl:grid-cols-4;
+  }
+  
+  .floating-orb {
+    @apply absolute rounded-full blur-xl opacity-20 animate-float;
+  }
+  
+  .loading-cyber {
+    @apply text-neon-blue font-cyber;
+  }
+}
