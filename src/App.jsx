@@ -290,6 +290,7 @@ function App() {
                     <th>LAP</th>
                     <th>BEST LAP</th>
                     <th>LAST LAP</th>
+                    <th>RACE TIME</th>
                     <th>GAP</th>
                     <th>LAPS</th>
                   </tr>
@@ -330,6 +331,11 @@ function App() {
                       <td>
                         <span className="bg-cyber-light px-3 py-1 rounded font-cyber text-neon-green">
                           {formatTime(rider.last_lap_time)}
+                        </span>
+                      </td>
+                      <td>
+                        <span className="bg-cyber-light px-3 py-1 rounded font-cyber text-neon-purple">
+                          {formatTime(rider.race_time)}
                         </span>
                       </td>
                       <td className="text-sm font-cyber text-white/80">{formatGap(rider.gap)}</td>
