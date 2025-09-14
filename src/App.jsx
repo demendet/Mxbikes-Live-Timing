@@ -292,7 +292,9 @@ function App() {
                           rider.status === 'DSQ' ? 'bg-red-800/20 text-red-400 border-red-400/50' :
                           'bg-white/20 text-white border-white/50'
                         }`}>
-                          {rider.status}
+                          {rider.status === 'TRK' ? 'On Track' : 
+                           rider.status === 'PIT' ? 'In Pit' :
+                           rider.status}
                         </span>
                       </td>
                       <td className="font-cyber text-neon-purple">{rider.current_lap || 0}</td>
