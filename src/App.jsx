@@ -17,8 +17,8 @@ function App() {
   // Fetch data from API
   const fetchData = async () => {
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
-      const response = await fetch(`${apiUrl}/servers/5121`)
+      const apiUrl = import.meta.env.VITE_API_URL || 'https://mxbike-api.sonicboosters.com'
+      const response = await fetch(`${apiUrl}/servers/c94fcd0e-907f-4efe-9b32-a684b7a62016`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
@@ -167,10 +167,10 @@ function App() {
         <div className="container mx-auto">
           <div className="flex items-center justify-between animate-slide-in-left">
             <div className="flex items-center space-x-6">
-              <h1 className="text-3xl md:text-4xl font-sans font-bold text-white">Default MX Server</h1>
+              <h1 className="text-3xl md:text-4xl font-sans font-bold text-white">{data?.server?.name || 'MX Bikes Server'}</h1>
             </div>
             <div className="text-right text-sm text-white/80 font-mono">
-              <p className="text-primary-blue">SERVER ID: 5121</p>
+              <p className="text-primary-blue">SERVER ID: {data?.server_id || 'Unknown'}</p>
               <p>LAST UPDATE: {lastUpdate?.toLocaleTimeString() || '--'}</p>
             </div>
           </div>
@@ -188,25 +188,25 @@ function App() {
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-white/70 font-futuristic">Name:</span>
-                <span className="font-cyber text-neon-blue">Default MX Server</span>
+                <span className="font-cyber text-neon-blue">{data?.server?.name || 'MX Bikes Server'}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-white/70 font-futuristic">Version:</span>
-                <span className="font-cyber text-neon-green">Beta20B</span>
+                <span className="font-cyber text-neon-green">{data?.server?.version || 'mxbikes'}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-white/70 font-futuristic">Location:</span>
-                <span className="font-cyber text-neon-purple">Europe</span>
+                <span className="font-cyber text-neon-purple">{data?.server?.location || 'Unknown'}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-white/70 font-futuristic">Players:</span>
                 <span className="font-cyber text-neon-yellow">
-                  {data?.riders?.length || 0} / 40
+                  {data?.server?.current_players || 0} / {data?.server?.max_players || 40}
                 </span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-white/70 font-futuristic">Server ID:</span>
-                <span className="font-cyber text-neon-pink">5121</span>
+                <span className="font-cyber text-neon-pink">{data?.server_id || 'Unknown'}</span>
               </div>
             </div>
           </div>
