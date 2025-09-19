@@ -8,7 +8,7 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen relative overflow-hidden">
       {/* Background Orbs */}
       {backgroundOrbs.map((orb, index) => (
         <div
@@ -18,27 +18,46 @@ function App() {
         />
       ))}
 
-      <div className="text-center z-10 animate-fade-in-up">
-        {/* CBR Logo */}
-        <div className="mb-8">
+      {/* CBR Logos at top */}
+      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center z-10">
+        <div className="space-y-4 flex flex-col items-center">
           <img
-            src="/cbr-logo.png"
-            alt="CBR Logo"
-            className="w-32 h-32 mx-auto mb-6 filter drop-shadow-[0_0_20px_rgba(0,255,255,0.3)]"
+            src="/CBR_White_Transparent_Background.png"
+            alt="CBR White Logo"
+            className="h-24 mx-auto"
+          />
+          <img
+            src="/CBR_Black_Transparent_Background.png"
+            alt="CBR Black Logo"
+            className="h-24 mx-auto"
           />
         </div>
+      </div>
 
-        {/* Coming Soon Text */}
-        <h1 className="main-header mb-6">COMING SOON</h1>
-        <p className="text-primary-blue font-mono text-xl mb-8">
-          NEW PROJECT IN DEVELOPMENT
-        </p>
+      {/* Coming Soon Content - Centered */}
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center z-10 animate-fade-in-up">
+          {/* Original CBR Logo */}
+          <div className="mb-8">
+            <img
+              src="/cbr-logo.png"
+              alt="CBR Original Logo"
+              className="h-32 mx-auto"
+            />
+          </div>
 
-        {/* Simple pulse dots */}
-        <div className="flex justify-center space-x-3">
-          <div className="w-4 h-4 bg-neon-blue rounded-full animate-pulse"></div>
-          <div className="w-4 h-4 bg-neon-pink rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
-          <div className="w-4 h-4 bg-neon-purple rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+          {/* Coming Soon Text */}
+          <h1 className="main-header mb-6">COMING SOON</h1>
+          <p className="text-primary-blue font-mono text-xl mb-8">
+            NEW PROJECT IN DEVELOPMENT
+          </p>
+
+          {/* Simple pulse dots */}
+          <div className="flex justify-center space-x-3">
+            <div className="w-4 h-4 bg-neon-blue rounded-full animate-pulse"></div>
+            <div className="w-4 h-4 bg-neon-pink rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></div>
+            <div className="w-4 h-4 bg-neon-purple rounded-full animate-pulse" style={{animationDelay: '0.6s'}}></div>
+          </div>
         </div>
       </div>
     </div>
