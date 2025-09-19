@@ -18,14 +18,30 @@ function App() {
         />
       ))}
 
+      {/* CBR Logos at top */}
+      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 text-center z-10">
+        <div className="space-y-4 flex flex-col items-center">
+          <img
+            src="/CBR_White_Transparent_Background.png"
+            alt="CBR White Logo"
+            className="h-24 mx-auto"
+          />
+          <img
+            src="/CBR_Black_Transparent_Background.png"
+            alt="CBR Black Logo"
+            className="h-24 mx-auto"
+          />
+        </div>
+      </div>
+
       {/* Coming Soon Content - Centered */}
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center z-10 animate-fade-in-up">
-          {/* CBR White Logo */}
+          {/* Original CBR Logo */}
           <div className="mb-8">
             <img
-              src="/CBR_White_Transparent_Background.png"
-              alt="CBR White Logo"
+              src="/cbr-logo.png"
+              alt="CBR Original Logo"
               className="h-32 mx-auto"
             />
           </div>
